@@ -18,9 +18,18 @@ async function main(){
   const [signer] = await ethers.getSigners();
   
   const contract = new ethers.Contract(contractAddress,abi, signer );
-  const favNum= await contract.favourateNum();
-
+  let favNum= await contract.favourateNumber();
   console.log("favNum: "+ favNum)
+
+  const updateNum = await contract.updateFavNum(237547);
+
+  updateNum.wait(6) // wait for block to be mined at 6 nodes
+
+  favNum= await contract.favourateNumber();
+
+  console.log("favourate number : "+ favNum);
+
+
 
 }
 main().then(()=>{
