@@ -1,12 +1,13 @@
 //SPDX-License-Identifier:MIT
 
-pragma solidity^0.8.19;
+pragma solidity ^0.8.19;
 
-contract Deploy{
+contract Lock{
+  
 error notEven(uint256 num);
-    uint256 public favourateNum=0 ;
+    uint256 public favourateNumber=17 ;
     function updateFavNum(uint256 _num) public  isEven(_num) returns (bool){
-        favourateNum=_num;
+        favourateNumber=_num;
         return true;
 
     }
@@ -18,3 +19,5 @@ error notEven(uint256 num);
         _;
     }
 }
+
+

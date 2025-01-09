@@ -2,9 +2,9 @@ import {ethers} from "ethers"
 
 import fs from "fs"
 try{
-    const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545")
+    const provider = new ethers.JsonRpcProvider("https://sepolia.infura.io/v3/b033e2f6b85a44ea90d24263164230d1")
 
-const wallet= new ethers.Wallet("0x0aa72bb15049526f5c863168552e27daac5fea55c18ed17e869e9a2a5dcdd4b9",provider );
+const wallet= new ethers.Wallet("bd14edb2bdbf6cec591d23728b27fa19e6bc2f030abac92ca4f9dfe5a086a762",provider );
 
 const abi = JSON.parse(fs.readFileSync("./garbage/blockchain_Deploy_sol_Deploy.abi","utf-8"))
 const binary= fs.readFileSync("./garbage/blockchain_Deploy_sol_Deploy.bin", "utf-8")
