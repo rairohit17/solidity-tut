@@ -8,8 +8,8 @@ hardhat/node_modules
 hardhat/.env
 
 # Hardhat files
-hardhat//cache
-hardhat//artifacts
+hardhat/cache
+hardhat/artifacts
 
 # TypeChain files
 hardhat/typechain

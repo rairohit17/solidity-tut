@@ -5,7 +5,7 @@ pragma solidity ^0.8.19;
 contract Lock{
   
 error notEven(uint256 num);
-    uint256 public favourateNumber=189 ;
+    uint256 public favourateNumber=0 ;
     function updateFavNum(uint256 _num) public  isEven(_num) returns (bool){
         favourateNumber=_num;
         return true;
