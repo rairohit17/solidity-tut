@@ -11,7 +11,7 @@ module.exports = async (hre)=>{
     console.log("deploying mock")
     const contract = await deploy("MockAggregator",{
         from:deployer,
-        args:[40000000],
+        args:[parseInt(process.env.MOCK_PRICE)],
         log:true,
         // waitConfirmations:confirmationWait
     })
@@ -19,4 +19,5 @@ module.exports = async (hre)=>{
     console.log("----------------------------------------------------")
     
 }
+module.exports.tags= ["all","mocks"]
 

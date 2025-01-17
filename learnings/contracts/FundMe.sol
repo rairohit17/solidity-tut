@@ -12,11 +12,11 @@ contract FundMe {
     using PriceFeeds for int256;
     
     address public immutable owner;
-    int256  internal minimumUsd=3000;
+    int256  public minimumUsd=50;
     uint256 public bal;
     address public ethUsdPriceFeedAddress;
     mapping( address=>uint256) public usersWithAmountFunded;
-    address[]  funders ;
+    address[] public funders ;
 
     
     
@@ -34,6 +34,10 @@ contract FundMe {
         sendEth();
      }
 
+     
+    function getAllFunders() public  view returns(  address[] memory){
+        return funders;
+    }
     
     function sendEth() public payable {
         uint256 sendValue= msg.value;

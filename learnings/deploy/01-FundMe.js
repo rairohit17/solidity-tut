@@ -40,5 +40,4 @@ module.exports = async( hre)=>{
     
 
 }
-
-module.exports.tags= ["FundMe"];
+module.exports.tags = ["all","FundMe" ]
