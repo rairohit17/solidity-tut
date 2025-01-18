@@ -74,7 +74,35 @@ describe("FundMe",()=>{
             const sum= BigInt(balance)+ BigInt("1000000000000000000");
             assert.equal(sum,newBalance,"the bal variable is not updated properly")
         })
+        it("must update the funder's amount in usersWithAmountFunded mappings",async()=>{
+            let tx= await fundMe.sendEth({value:BigInt("1000000000000000000")})
+            let address = tx.from;
+            const initialFundedAmount= await fundMe.usersWithAmountFunded(address);
+            let newTx= await fundMe.sendEth({value:BigInt("1000000000000000000")})
+            const finalFundedAmount= await fundMe.usersWithAmountFunded(address);
+            let sum = BigInt(initialFundedAmount) + BigInt('1000000000000000000');
+            assert.equal(finalFundedAmount,sum)
+
+        })
+
         
     })
+    describe("withdraw", ()=>{
+
+    let acc
+    beforeEach(async()=>{
+         acc = await  ethers.getSigners()
+
+    })
+
+    it("must only allow owner to withdraw eth",async()=>{
+        const tx = await fundMe.sendEth({value:BigInt("1000000000000000000")});
+        // const address = tx.from;
+        const balance  = await fundMe.bal();
+        const fundMeConnection = await fundMe.connect(acc[2]);
+        expect(fundMeConnection.withdraw(BigInt(balance))).to.be.reverted;
+        
+    })
+})
 
 })
