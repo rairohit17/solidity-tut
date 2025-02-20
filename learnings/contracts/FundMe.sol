@@ -11,10 +11,10 @@ error largeValueWithdraw();
 contract FundMe {
     using PriceFeeds for int256;
     
-    address public immutable owner;
-    int256  public minimumUsd=50;
-    uint256 public bal;
-    address public ethUsdPriceFeedAddress;
+    address private immutable owner;
+    int256  public constant minimumUsd=50;
+    uint256 private bal;
+    address private immutable  ethUsdPriceFeedAddress;
     mapping( address=>uint256) public usersWithAmountFunded;
     address[] public funders ;
 
@@ -47,7 +47,7 @@ contract FundMe {
         
         bal = bal+sendValue;
         if (findFunder(msg.sender)){
-            usersWithAmountFunded[msg.sender] = usersWithAmountFunded[msg.sender]+sendValue;
+           usersWithAmountFunded[msg.sender] = usersWithAmountFunded[msg.sender]+sendValue;
 
         }
         else{
@@ -64,7 +64,7 @@ contract FundMe {
             if(funders[i]== sender){
                 return true;
             }
-        }
+        } 
         return false;
 
     }
@@ -83,6 +83,8 @@ contract FundMe {
             revert notOwner();
         }
         _;
+    }
+    function getBalance() public view returns(uint256){ return bal;
     }
   
 

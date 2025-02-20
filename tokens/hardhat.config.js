@@ -1,21 +1,11 @@
 require("@nomicfoundation/hardhat-toolbox");
-require ("hardhat-deploy");
-require("@nomicfoundation/hardhat-ethers")
-// require("@nomiclabs/hardhat-etherscan");
-require("dotenv").config();
-require("hardhat-gas-reporter")
+require("@nomicfoundation/hardhat-ignition-ethers")
+require("dotenv").config()
+
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: {
-    compilers:[
-      {
-        version:"0.8.19",
-      }
-    ]
-    
-  },
-  defaultNetwork:"hardhat",
+  solidity: "0.8.28",
   networks:{
     hardhat:{
         chainId:31337,

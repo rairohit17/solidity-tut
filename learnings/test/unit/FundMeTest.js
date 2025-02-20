@@ -68,9 +68,9 @@ describe("FundMe",()=>{
             
         })
         it("must add update the  value of bal upon sending etherium", async()=>{
-            let balance = await fundMe.bal();
+            let balance = await fundMe.getBalance();
             await fundMe.sendEth({value:BigInt("1000000000000000000")});
-            const newBalance= await fundMe.bal();
+            const newBalance= await fundMe.getBalance();
             const sum= BigInt(balance)+ BigInt("1000000000000000000");
             assert.equal(sum,newBalance,"the bal variable is not updated properly")
         })
@@ -92,15 +92,26 @@ describe("FundMe",()=>{
     let acc
     beforeEach(async()=>{
          acc = await  ethers.getSigners()
+         const tx = await fundMe.sendEth({value:BigInt("1000000000000000000")});
+
 
     })
 
     it("must only allow owner to withdraw eth",async()=>{
-        const tx = await fundMe.sendEth({value:BigInt("1000000000000000000")});
         // const address = tx.from;
-        const balance  = await fundMe.bal();
+        const balance = await fundMe.getBalance();
         const fundMeConnection = await fundMe.connect(acc[2]);
         expect(fundMeConnection.withdraw(BigInt(balance))).to.be.reverted;
+        
+    })
+    
+    it("must change the balance upon withdraw ", async()=>{
+        const balance = await fundMe.getBalance()
+        const withdrawlAmount = BigInt(balance)/BigInt(2)
+        let withdrawl = await fundMe.withdraw(withdrawlAmount);
+        
+        assert.equal(await fundMe.getBalance() , BigInt(balance)- withdrawlAmount )
+        
         
     })
 })

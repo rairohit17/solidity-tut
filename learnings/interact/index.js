@@ -2,7 +2,7 @@ const {ethers,deployments ,getNamedAccounts} = require("hardhat")
 const {deployer} = getNamedAccounts();
 
  async function main(){
-    let FundMe = await deployments.fixture(["all"])
+   //  let FundMe = await deployments.fixture(["all"])
     console.log("#####1")
     const transactionDetails = await deployments.get("FundMe"); 
     console.log("#####2")
@@ -17,7 +17,7 @@ const {deployer} = getNamedAccounts();
 
     const rescipt= await sendMoney.wait();
     console.log("#####5")
-    const value = await FundMe.bal();
+    const value = await FundMe.getBalance();
     console.log("transaction sucessfull : ")
     console.log(value);
 
@@ -25,7 +25,7 @@ const {deployer} = getNamedAccounts();
 
     const withdrawl = await FundMe.withdraw(value)
     const withdrawlRecipt= await withdrawl.wait();
-    console.log("withdrawl successfull , new balance ;" +await FundMe.bal() )
+    console.log("withdrawl successfull , new balance ;" +await FundMe.getBalance() )
 
 
  }
